@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="header-view-records">View Records</h2>
+    <ul class="records-list">
+        {% for record in records %}
+            <li class="record-item">
+                <strong>{{ record.name }}:</strong> {{ record.description }}
+                <form method="post" action="{% url 'delete_record' record.id %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_record' %}" class="btn btn-primary">Add Record</a>
+{% endblock %}
